@@ -1,0 +1,65 @@
+# Cordova generated files and platforms
+/platforms/
+/plugins/
+/www/
+/node_modules/
+/plugins/
+/plugins/android.json
+/plugins/ios.json
+/plugins/browser.json
+/plugins/windows.json
+
+# Cordova build artifacts
+*.apk
+*.ap_
+*.keystore
+
+# IDE and editor files
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.user
+*.suo
+*.idea/
+*.suo
+*.user
+*.suo
+*.user
+*.suo
+*.suo
+*.sw?
+*.suo
+*.suo
+.suo
+*.suo
+*.user
+*.userprefs
+*.lock-wscript
+*.beam
+erl_crash.dump
+# Xcode
+.DS_Store
+build/
+*.pbxuser
+!default.pbxuser
+*.mode1v3
+!default.mode1v3
+*.mode2v3
+!default.mode2v3
+*.perspectivev3
+!default.perspectivev3
+xcuserdata
+*.xccheckout
+*.moved-aside
+DerivedData
+.idea/
+.vscode/
+# Android
+/local.properties
+
+# Gradle files
+.gradle/
+build/

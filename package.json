@@ -1,6 +1,6 @@
 {
   "name": "community-cordova-plugin-cpu",
-  "version": "1.0.2",
+  "version": "1.0.0",
   "types": "./types/index.d.ts",
   "readme": "README.md",
   "repository": "EYALIN/community-cordova-plugin-cpu/tree/master",
@@ -14,5 +14,5 @@
       "ios"
     ]
   },
-  "description": "A plugin for full detail for each cpu"
+  "description": "A plugin for full detail for cpu"
 }

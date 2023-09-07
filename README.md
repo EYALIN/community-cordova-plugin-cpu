@@ -17,6 +17,13 @@ or if you're asking for new features or priority bug fixes. Thank you!
 ## Overview
 
 The `CpuManager` is a TypeScript class designed to provide information about the CPU (Central Processing Unit) of a device. This README file aims to provide a detailed description of the code and its usage.
+
+## Installation
+
+To use the `CpuManager` class, you need to install it as a dependency in your project:
+```bash
+cordova plugin add community-cordova-plugin-cpu
+```
 * for now it's Android only
 
 
@@ -33,13 +40,6 @@ The `CpuManager` is a TypeScript class designed to provide information about the
 
 The `CpuManager` class exports methods to retrieve essential information about the device's CPU, such as architecture, core count, frequency, model, and more. It uses TypeScript and is intended for use in Node.js or other JavaScript environments.
 
-## Installation
-
-To use the `CpuManager` class, you need to install it as a dependency in your project:
-
-```bash
-cordova plugin add community-cordova-plugin-cpu
-```
 
 ## Usage
 
