@@ -1,11 +1,11 @@
-var PLUGIN_NAME = 'CpuPlugin';
+var PLUGIN_NAME = 'RamPlugin';
 
-var CpuPlugin = {
-    getCpuInfo: function(phrase) {
+var RamPlugin = {
+    getRAMInfo: function(phrase) {
         return new Promise(function (resolve, reject) {
-            cordova.exec(resolve, reject, PLUGIN_NAME, 'getCpuInfo', [phrase]);
+            cordova.exec(resolve, reject, PLUGIN_NAME, 'getRAMInfo', [phrase]);
         });
     },
 };
 
-module.exports = CpuPlugin;
+module.exports = RamPlugin;

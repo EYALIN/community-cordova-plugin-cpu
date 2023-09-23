@@ -1,37 +1,28 @@
-export interface ICpu {
-    // CPU architecture, e.g., ARMv7, ARMv8, x86, x86_64, etc.
-    cpuArchitecture: string;
+/**
+ * Represents the RAM information response.
+ */
+export interface IRAMInfoResponse {
+    /**
+     * The total physical RAM available on the device in bytes.
+     */
+    totalRAM: number;
 
-    // Number of CPU cores available on the device
-    cpuCores: number;
+    /**
+     * The amount of RAM that is currently in use in bytes.
+     */
+    usedRAM: number;
 
-    // Maximum CPU frequency in MHz
-    cpuFrequencyMax: string;
+    /**
+     * The amount of free RAM available for use in bytes.
+     */
+    freeRAM: number;
 
-    // Minimum CPU frequency in MHz
-    cpuFrequencyMin: string;
-
-    // CPU model or identifier
-    cpuModel: number;
-
-    // Primary ABI (Application Binary Interface)
-    primaryABI: string;
-
-    // Secondary ABI (Application Binary Interface) if available
-    secondaryABI: string;
-
-    // Array of CPU core-specific information
-    cpuFrequencyInfo: ICpuCores[];
+    /**
+     * The percentage of RAM usage, calculated as (usedRAM / totalRAM) * 100.
+     */
+    ramUsagePercent: number;
 }
 
-// Interface for CPU core-specific information
-export interface ICpuCores {
-    // Core index or identifier
-    coreIndex: number;
-    // Current CPU frequency for the core in MHz
-    currentFrequency: string;
-}
-
-export default class CpuManager {
-    getCpuInfo(): Promise<ICpu>;
+export default class RamManager {
+    getRAMInfo(): Promise<IRAMInfoResponse>;
 }
