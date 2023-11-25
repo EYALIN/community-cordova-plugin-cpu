@@ -1,18 +1,18 @@
 {
-  "name": "community-cordova-plugin-cpu",
+  "name": "community-cordova-plugin-ram",
   "version": "1.0.0",
   "types": "./types/index.d.ts",
   "readme": "README.md",
-  "repository": "EYALIN/community-cordova-plugin-cpu/tree/master",
-  "homepage": "https://github.com/EYALIN/community-cordova-plugin-cpu/tree/master",
+  "repository": "EYALIN/community-cordova-plugin-ram/tree/master",
+  "homepage": "https://github.com/EYALIN/community-cordova-plugin-ram/tree/master",
   "funding": "https://github.com/sponsors/EYALIN",
-  "bugs": "https://github.com/EYALIN/community-cordova-plugin-cpu/issues",
+  "bugs": "https://github.com/EYALIN/community-cordova-plugin-ram/issues",
   "cordova": {
-    "id": "community-cordova-plugin-cpu",
+    "id": "community-cordova-plugin-ram",
     "platforms": [
       "android",
       "ios"
     ]
   },
-  "description": "A plugin for full detail for cpu"
+  "description": "A plugin for full detail for ram"
 }
