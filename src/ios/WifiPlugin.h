@@ -1,6 +1,6 @@
 #import <Cordova/CDVPlugin.h>
 
-@interface RamPlugin : CDVPlugin {
+@interface WifiPlugin : CDVPlugin {
 }
 
 // The hooks for our plugin commands

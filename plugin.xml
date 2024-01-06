@@ -1,46 +1,60 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
-        id="community-cordova-plugin-ram"
+        id="community-cordova-plugin-wifi"
         version="1.0.0">
     <name>Cordova Plugin RAM</name>
     <description></description>
     <license>MIT</license>
     <keywords></keywords>
-    <repo>https://github.com/eyalin/community-cordova-plugin-ram.git</repo>
-    <issue>https://github.com/eyalin/community-cordova-plugin-ram/issues</issue>
+    <repo>https://github.com/eyalin/community-cordova-plugin-wifi.git</repo>
+    <issue>https://github.com/eyalin/community-cordova-plugin-wifi/issues</issue>
 
     <!-- android -->
     <platform name="android">
-        <js-module src="www/plugin.js" name="RamPlugin">
+        <config-file target="AndroidManifest.xml" parent="/*">
+            <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+            <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+            <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+            <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+            <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+            <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
+            <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE"/>
+            <uses-permission android:name="android.permission.INTERNET"/>
+        </config-file>
+        <js-module src="www/plugin.js" name="WifiPlugin">
             <runs/>
 
-            <!-- This is the window variable name you want, like window.RamPlugin -->
-            <clobbers target="RamPlugin" />
+            <!-- This is the window variable name you want, like window.WifiPlugin -->
+            <clobbers target="WifiPlugin" />
         </js-module>
         <config-file target="res/xml/config.xml" parent="/*">
-            <feature name="RamPlugin">
-                <param name="android-package" value="ramplugin.RamPlugin" />
+            <feature name="WifiPlugin">
+                <param name="android-package" value="wifiplugin.WifiPlugin" />
                 <param name="onload" value="true" />
             </feature>
         </config-file>
 
-        <source-file src="src/android/RamPlugin.java" target-dir="src/android" />
+        <source-file src="src/android/WifiPlugin.java" target-dir="src/android" />
+        <source-file src="src/android/IpInfoUtils.java" target-dir="src/android" />
+        <source-file src="src/android/PingTask.java" target-dir="src/android" />
+        <source-file src="src/android/WifiDetailsUtils.java" target-dir="src/android" />
+        <source-file src="src/android/WifiUtils.java" target-dir="src/android" />
     </platform>
 
     <!-- ios -->
     <platform name="ios">
         <js-module src="www/plugin.js" name="plugin">
             <runs/>
-            <clobbers target="RamPlugin" />
+            <clobbers target="WifiPlugin" />
         </js-module>
         <config-file target="config.xml" parent="/*">
-            <feature name="RamPlugin">
-                <param name="ios-package" value="RamPlugin" onload="true" />
+            <feature name="WifiPlugin">
+                <param name="ios-package" value="WifiPlugin" onload="true" />
             </feature>
         </config-file>
 
-        <header-file src="src/ios/RamPlugin.h" />
-        <source-file src="src/ios/RamPlugin.m" />
+        <header-file src="src/ios/WifiPlugin.h" />
+        <source-file src="src/ios/WifiPlugin.m" />
     </platform>
 </plugin>

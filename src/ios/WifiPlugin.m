@@ -1,9 +1,9 @@
-#import "RamPlugin.h"
+#import "WifiPlugin.h"
 #import <mach/task.h> // Import the mach/task.h module
 #import <mach/mach.h> // Import the mach/mach.h module
 #import <Cordova/CDVAvailability.h>
 
-@implementation RamPlugin
+@implementation WifiPlugin
 
 - (void)pluginInitialize {
 }

@@ -5,13 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5a269414-5baa-4c38-b2f3-50c21d305b88" name="Changes" comment="update plugin">
+      <change afterPath="$PROJECT_DIR$/src/android/IpInfoUtils.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/android/PingTask.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/android/WifiDetailsUtils.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/android/WifiUtils.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/plugin.xml" beforeDir="false" afterPath="$PROJECT_DIR$/plugin.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/android/CpuPlugin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/android/RamPlugin.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ios/CpuPlugin.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/ios/RamPlugin.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ios/CpuPlugin.m" beforeDir="false" afterPath="$PROJECT_DIR$/src/ios/RamPlugin.m" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/android/RamPlugin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/android/WifiPlugin.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ios/RamPlugin.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/ios/WifiPlugin.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ios/RamPlugin.m" beforeDir="false" afterPath="$PROJECT_DIR$/src/ios/WifiPlugin.m" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/types/index.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/types/index.d.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/www/plugin.js" beforeDir="false" afterPath="$PROJECT_DIR$/www/plugin.js" afterDir="false" />
     </list>
@@ -35,22 +38,28 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Volumes/Development/Git/forked/community-cordova-plugin-ram&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;/Applications/WebStorm.app/Contents/plugins/javascript-impl/jsLanguageServicesImpl/external&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "main",
+    "last_opened_file_path": "/Volumes/Development/Git/forked/community-cordova-plugin-wifi/src/android",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "preferences.lookFeel",
+    "ts.external.directory.path": "/Applications/WebStorm.app/Contents/plugins/javascript-impl/jsLanguageServicesImpl/external",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/android" />
+    </key>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -62,7 +71,12 @@
       <workItem from="1694065874545" duration="2544000" />
       <workItem from="1694096923102" duration="7155000" />
       <workItem from="1694674927377" duration="5790000" />
-      <workItem from="1695444377955" duration="1079000" />
+      <workItem from="1695444377955" duration="2093000" />
+      <workItem from="1697977836525" duration="1232000" />
+      <workItem from="1700879084997" duration="1517000" />
+      <workItem from="1703786483609" duration="991000" />
+      <workItem from="1703818528645" duration="3425000" />
+      <workItem from="1703822230230" duration="42779000" />
     </task>
     <task id="LOCAL-00001" summary="update plugin">
       <option name="closed" value="true" />
@@ -80,7 +94,15 @@
       <option name="project" value="LOCAL" />
       <updated>1694067087785</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="update plugin">
+      <option name="closed" value="true" />
+      <created>1695446707323</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1695446707323</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
