@@ -54,6 +54,13 @@
             </feature>
         </config-file>
 
+        <config-file target="*-Info.plist" parent="NSLocationWhenInUseUsageDescription">
+            <string>Your location is used to access WiFi information.</string>
+        </config-file>
+        <config-file target="*-Info.plist" parent="NSLocationAlwaysAndWhenInUseUsageDescription">
+            <string>Your location is used to access WiFi information even when the app is in the background.</string>
+        </config-file>
+
         <header-file src="src/ios/WifiPlugin.h" />
         <source-file src="src/ios/WifiPlugin.m" />
     </platform>

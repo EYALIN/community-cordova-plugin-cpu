@@ -46,6 +46,15 @@ interface WifiDetails {
     DNS1: string;
     DNS2: string;
 }
+
+interface PingResponse {
+    line?: string;
+    fullResponse?: string;
+    progress?: number;
+    status?: string;
+    linesRead?: number;
+}
+
 interface IpInfo {
     type: string;
     signal: number;
@@ -83,6 +92,6 @@ export default class WifiManager {
     getConnectedDevices(): Promise<ConnectedDeviceInfo[]>;
     getWifiStrength(): Promise<number>;
     getSignalStrength(): Promise<number>;
-    ping(address: string, count: number, timeout: number): Promise<string[]>;
+    ping(address: string, count: number, timeout: number, successCallback: (response: PingResponse) => void, errorCallback: (error: any) => void): void;
 
 }

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.Network;
 import android.net.NetworkCapabilities;
+import android.net.NetworkRequest;
 import android.net.NetworkInfo;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiInfo;
@@ -194,7 +195,7 @@ public class WifiPlugin extends CordovaPlugin {
         WifiNetworkSpecifier.Builder builder = new WifiNetworkSpecifier.Builder()
            .setSsid(ssid)
            .setWpa2Passphrase(password);
-
+WifiManager wifiManager = (WifiManager) cordova.getActivity().getApplicationContext().getSystemService(Context.WIFI_SERVICE);
        NetworkSpecifier specifier = builder.build();
 
        NetworkRequest request = new NetworkRequest.Builder()

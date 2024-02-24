@@ -4,33 +4,46 @@ import org.apache.cordova.CallbackContext;
 import org.apache.cordova.PluginResult;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.List;
-import org.json.JSONArray;
+import org.json.JSONObject;
 import org.apache.cordova.CordovaInterface;
 
 public class PingTask {
 
-    public static void ping(String address, int count, int timeout, CallbackContext callbackContext,CordovaInterface cordova) {
-           cordova.getThreadPool().execute(() -> {
-                       try {
-                           String command = "/system/bin/ping -c " + count + " -W " + timeout + " " + address;
-                           Process process = Runtime.getRuntime().exec(command);
+    public static void ping(String address, int count, int timeout, CallbackContext callbackContext, CordovaInterface cordova) {
+        cordova.getThreadPool().execute(() -> {
+            try {
+                String command = "/system/bin/ping -c " + count + " -W " + timeout + " " + address;
+                Process process = Runtime.getRuntime().exec(command);
+                BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
 
-                           BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
-                           List<String> pingResults = new ArrayList<>();
-                           String line;
-                           while ((line = reader.readLine()) != null) {
-                               pingResults.add(line);
-                           }
+                int linesRead = 0;
+                String line;
+                String fullResponse;
+                while ((line = reader.readLine()) != null) {
+                    linesRead++;
+                    JSONObject progressUpdate = new JSONObject();
+                      // Ensure progress does not exceed 100
+                                    int progress = (int) (((double) linesRead / count) * 100);
+                                    progress = Math.min(progress, 100); // Cap progress at 100
+                    progressUpdate.put("line", line);
+                    fullResponse = fullResponse + '\n' + line;
+                    progressUpdate.put("line", line);
+                    progressUpdate.put("fullResponse", fullResponse);
+                    progressUpdate.put("progress", progress);
+                    PluginResult progressResult = new PluginResult(PluginResult.Status.OK, progressUpdate);
+                    progressResult.setKeepCallback(true);
+                    callbackContext.sendPluginResult(progressResult);
+                }
 
-                           process.waitFor();
-                           JSONArray jsonArray = new JSONArray(pingResults);
-                           PluginResult result = new PluginResult(PluginResult.Status.OK, jsonArray);
-                           callbackContext.sendPluginResult(result);
-                       } catch (Exception e) {
-                           callbackContext.error("Error during ping: " + e.getMessage());
-                       }
-                   });
-       }
+                process.waitFor();
+                JSONObject finalResult = new JSONObject();
+                finalResult.put("status", "completed");
+                finalResult.put("linesRead", linesRead);
+                PluginResult result = new PluginResult(PluginResult.Status.OK, finalResult);
+                callbackContext.sendPluginResult(result);
+            } catch (Exception e) {
+                callbackContext.error("Error during ping: " + e.getMessage());
+            }
+        });
+    }
 }
