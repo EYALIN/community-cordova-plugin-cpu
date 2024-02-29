@@ -6,12 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="5a269414-5baa-4c38-b2f3-50c21d305b88" name="Changes" comment="update plugin">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/plugin.xml" beforeDir="false" afterPath="$PROJECT_DIR$/plugin.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/android/PingTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/android/PingTask.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/android/WifiPlugin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/android/WifiPlugin.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ios/WifiPlugin.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/ios/WifiPlugin.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ios/WifiPlugin.m" beforeDir="false" afterPath="$PROJECT_DIR$/src/ios/WifiPlugin.m" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/types/index.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/types/index.d.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -91,7 +86,8 @@
       <workItem from="1703818528645" duration="3425000" />
       <workItem from="1703822230230" duration="44262000" />
       <workItem from="1708181011949" duration="10604000" />
-      <workItem from="1708240272493" duration="17177000" />
+      <workItem from="1708240272493" duration="19053000" />
+      <workItem from="1709102390279" duration="3081000" />
     </task>
     <task id="LOCAL-00001" summary="update plugin">
       <option name="closed" value="true" />
@@ -125,7 +121,15 @@
       <option name="project" value="LOCAL" />
       <updated>1704549829774</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="update plugin">
+      <option name="closed" value="true" />
+      <created>1708805859165</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1708805859165</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

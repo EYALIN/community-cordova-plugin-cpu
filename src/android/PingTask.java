@@ -18,7 +18,7 @@ public class PingTask {
 
                 int linesRead = 0;
                 String line;
-                String fullResponse;
+                String fullResponse = "";
                 while ((line = reader.readLine()) != null) {
                     linesRead++;
                     JSONObject progressUpdate = new JSONObject();
@@ -26,7 +26,11 @@ public class PingTask {
                                     int progress = (int) (((double) linesRead / count) * 100);
                                     progress = Math.min(progress, 100); // Cap progress at 100
                     progressUpdate.put("line", line);
-                    fullResponse = fullResponse + '\n' + line;
+                    if (fullResponse != null && !fullResponse.isEmpty()) {
+                        fullResponse = fullResponse + "\n" + line;
+                    } else {
+                        fullResponse = line;
+                    }
                     progressUpdate.put("line", line);
                     progressUpdate.put("fullResponse", fullResponse);
                     progressUpdate.put("progress", progress);
@@ -37,6 +41,9 @@ public class PingTask {
 
                 process.waitFor();
                 JSONObject finalResult = new JSONObject();
+                finalResult.put("line", "");
+                finalResult.put("fullResponse", fullResponse);
+                finalResult.put("progress", 100);
                 finalResult.put("status", "completed");
                 finalResult.put("linesRead", linesRead);
                 PluginResult result = new PluginResult(PluginResult.Status.OK, finalResult);
