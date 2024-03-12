@@ -67,20 +67,14 @@ public static void getSignalStrength(Context context, CallbackContext callbackCo
             wifiManager.startScan();
             List<ScanResult> scanResults = wifiManager.getScanResults();
 
-            // Sort the scan results by SSID in ascending order
-           Collections.sort(scanResults, new Comparator<ScanResult>() {
-               @Override
-               public int compare(ScanResult o1, ScanResult o2) {
-                   if (o1.SSID.isEmpty() && o2.SSID.isEmpty()) {
-                       return 0;
-                   } else if (o1.SSID.isEmpty()) {
-                       return 1; // Place o1 at the end if its SSID is empty
-                   } else if (o2.SSID.isEmpty()) {
-                       return -1; // Place o2 at the end if its SSID is empty
-                   }
-                   return o1.SSID.compareToIgnoreCase(o2.SSID);
-               }
-           });
+            // Sort the scan results by Level in ascending order
+          Collections.sort(scanResults, new Comparator<ScanResult>() {
+              @Override
+              public int compare(ScanResult o1, ScanResult o2) {
+                  // Sort in descending order of signal strength (higher values first)
+                  return Integer.compare(o2.level, o1.level);
+              }
+          });
 
             JSONArray wifiArray = new JSONArray();
             for (ScanResult scanResult : scanResults) {
@@ -180,15 +174,14 @@ private static boolean hasPassword(String capabilities) {
                         try {
                             if (InetAddress.getByName(ip).isReachable(100)) {
                                 JSONObject deviceObject = new JSONObject();
-                                deviceObject.put("ip4", ip);
-                                deviceObject.put("deviceName", getDeviceNameByIp(ip));
-                                deviceObject.put("localHost", isLocalHost(ip));
-                                deviceObject.put("loopbackAddress", isLoopbackAddress(ip));
-                                deviceObject.put("hostAddress", getHostAddress(ip));
-                                deviceObject.put("canonicalHostName", getCanonicalHostName(ip));
-                                deviceObject.put("multicastAddress", isMulticastAddress(ip));
-                                deviceObject.put("siteLocalAddress", isSiteLocalAddress(ip));
-
+deviceObject.put("ipAddress", ip);
+deviceObject.put("deviceName", getDeviceNameByIp(ip));
+deviceObject.put("localHost", isLocalHost(ip));
+deviceObject.put("loopbackAddress", isLoopbackAddress(ip));
+deviceObject.put("hostAddress", getHostAddress(ip));
+deviceObject.put("canonicalHostName", getCanonicalHostName(ip));
+deviceObject.put("multicastAddress", isMulticastAddress(ip));
+deviceObject.put("siteLocalAddress", isSiteLocalAddress(ip));
                                 devicesArray.put(deviceObject);
                             }
                         } catch (UnknownHostException | JSONException e) {

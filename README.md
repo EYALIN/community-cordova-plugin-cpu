@@ -1,7 +1,8 @@
-[![NPM version](https://img.shields.io/npm/v/community-cordova-plugin-cpu)](https://www.npmjs.com/package/community-cordova-plugin-cpu)
+# Community Cordova Plugin WiFi
 
 
-# community-cordova-plugin-cpu README
+The Community Cordova Plugin WiFi offers extensive WiFi management functionalities for Cordova applications on Android and iOS platforms. While Android devices benefit from a wide range of WiFi management capabilities, iOS support focuses on network information retrieval due to platform restrictions.
+
 
 I dedicate a considerable amount of my free time to developing and maintaining many cordova plugins for the community ([See the list with all my maintained plugins][community_plugins]).
 To help ensure this plugin is kept updated,
@@ -13,69 +14,149 @@ or if you're asking for new features or priority bug fixes. Thank you!
 [![](https://img.shields.io/static/v1?label=Sponsor%20Me&style=for-the-badge&message=%E2%9D%A4&logo=GitHub&color=%23fe8e86)](https://github.com/sponsors/eyalin)
 
 
----
+## Features
 
-# Community Cordova Plugin CPU
-
-## Overview
-This Cordova plugin provides a way to access basic CPU information of the mobile device. It supports both Android and iOS platforms, offering different sets of information based on the platform due to their respective system limitations and capabilities.
+- Scan for available WiFi networks (Android)
+- Connect to or disconnect from a WiFi network (Android)
+- Check WiFi status and toggle WiFi (Android)
+- Retrieve current network information
+- Check internet connectivity
+- Ping network addresses (Android)
+- Obtain WiFi signal strength and other network details
 
 ## Installation
-To install the plugin in your Cordova project, use the following command:
-```
-cordova plugin add community-cordova-plugin-cpu
+
+```bash
+cordova plugin add community-cordova-plugin-wifi
 ```
 
-## Usage
-To use the plugin, call the `getCpuInfo` method. This method is asynchronous and returns a Promise that resolves with the CPU information.
+## API Reference and Examples
+
+### isConnectedToInternet
+
+**Platform Support:** Android, iOS
+
+Checks if there is an active internet connection.
+
+#### Example
 
 ```javascript
-document.addEventListener('deviceready', onDeviceReady, false);
-
-function onDeviceReady() {
-    CpuManager.getCpuInfo().then(function(info) {
-        console.log('CPU Information:', info);
-    }).catch(function(error) {
-        console.error('Error getting CPU information:', error);
-    });
-}
+WifiPlugin.isConnectedToInternet().then(isConnected => {
+    console.log("Internet connectivity status:", isConnected);
+}).catch(error => {
+    console.error("Error:", error);
+});
 ```
 
-### API
+**Response:**
 
-#### getCpuInfo()
-Returns a Promise that resolves with an object containing CPU information. The structure of the returned object varies between Android and iOS:
+- `isConnected` (boolean): True if the device is connected to the internet.
 
-#### Android
-The response object includes:
+### getWifiList (Android Only)
 
-- `cpuArchitecture`: The architecture of the CPU (e.g., ARMv7, ARMv8).
-- `cpuCores`: The number of CPU cores available on the device.
-- `cpuFrequencyMax`: The maximum CPU frequency (in MHz).
-- `cpuFrequencyMin`: The minimum CPU frequency (in MHz).
-- `cpuModel`: The model or identifier of the CPU.
-- `primaryABI`: The primary Application Binary Interface (ABI) of the device.
-- `secondaryABI`: The secondary ABI of the device, if available.
-- `cpuFrequencyInfo`: An array containing information about each CPU core, including core index and current frequency.
+Scans for available WiFi networks.
 
-#### iOS
-Due to iOS restrictions, the response object includes a limited set of information:
+**Platform Support:** Android
 
-- `cpuArchitecture`: The architecture of the CPU (e.g., ARM64, x86_64).
-- `cpuCores`: The number of active CPU cores.
-- `primaryABI`: The primary ABI based on the CPU architecture.
+#### Example
 
-**Note**: iOS does not allow access to certain details like CPU frequency or the exact CPU model.
+```javascript
+WifiPlugin.getWifiList().then(wifiList => {
+    console.log("WiFi networks:", wifiList);
+}).catch(error => {
+    console.error("Error:", error);
+});
+```
 
-## Platform Specifics
-- **Android**: Provides comprehensive CPU information, including architecture, core count, frequency, model, and ABIs.
-- **iOS**: Limited to providing CPU architecture, core count, and primary ABI due to iOS system restrictions.
+**Response Fields:**
+
+Each object in the `wifiList` array contains:
+- `SSID` (string): Network name.
+- `BSSID` (string): Access point MAC address.
+- `capabilities` (string): Supported protocols and authentication methods.
+- `frequency` (number): Channel frequency in MHz.
+- `level` (number): Signal strength in dBm.
+- `security` (string): Security protocols in use.
+
+### getAllWifiDetails
+
+Retrieves comprehensive WiFi network details.
+
+**Platform Support:** Android, iOS (Limited details on iOS)
+
+#### Example
+
+```javascript
+WifiPlugin.getAllWifiDetails().then(details => {
+    console.log("WiFi Details:", details);
+}).catch(error => {
+    console.error("Error:", error);
+});
+```
+
+**Response Fields:**
+
+- `ssid` (string): Current network SSID.
+- `bssid` (string): Network BSSID.
+- `ip` (string): Device IP address in the network.
+- `mac` (string, Android only): Device MAC address.
+- `signalStrength` (number, Android only): WiFi signal strength.
+- Additional network details may include `networkid`, `linkspeed`, `rssi`, etc., with availability varying between platforms.
+
+### isWifiEnabled (Android Only)
+
+Checks if WiFi is enabled on the device.
+
+**Platform Support:** Android
+
+#### Example
+
+```javascript
+WifiPlugin.isWifiEnabled().then(isEnabled => {
+    console.log("WiFi Enabled:", isEnabled);
+}).catch(error => {
+    console.error("Error:", error);
+});
+```
+
+**Response:**
+
+- `isEnabled` (boolean): True if WiFi is enabled.
+
+### connectToNetwork (Android Only)
+
+Connects to a specified WiFi network.
+
+**Platform Support:** Android
+
+#### Example
+
+```javascript
+WifiPlugin.connectToNetwork("SSID", "password").then(() => {
+    console.log("Connected successfully.");
+}).catch(error => {
+    console.error("Error:", error);
+});
+```
+
+No additional response fields.
+
+## Platform Support
+
+This plugin supports Android and iOS. Note that iOS functionalities are limited to retrieving network information due to platform restrictions.
+
+## Permissions
+
+Ensure your application requests the necessary permissions. Android requires permissions for accessing WiFi state, location, and changing WiFi connectivity. iOS may require location permissions for accessing network information.
 
 ## Contributing
-Contributions to the plugin are welcome. Please ensure to follow the coding standards and submit your pull requests for review.
+
+Contributions are welcome! Feel free to submit pull requests or open issues on the [GitHub repository](https://github.com/EYALIN/community-cordova-plugin-wifi).
 
 ## License
-This project is licensed under the MIT License.
+
+This project is licensed under the MIT License - see the LICENSE file for details.
 
 ---
+
 [community_plugins]: https://github.com/EYALIN?tab=repositories&q=community&type=&language=&sort=

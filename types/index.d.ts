@@ -29,23 +29,24 @@ interface ConnectedDeviceInfo {
 }
 
 interface WifiDetails {
-    isWifiEnabled: boolean;
-    isSupportWifi: boolean;
-    SSID: string;
-    BSSID: string;
-    IP: string;
-    MAC: string;
-    NetworkID: number;
-    LinkSpeed: number;
-    SignalStrength: number;
-    Gateway: string;
-    RSSI: number;
-    Speed: number;
-    Frequency: number;
-    Channel: number;
-    DNS1: string;
-    DNS2: string;
+    iswifienabled: boolean;
+    issupportwifi: boolean;
+    ssid: string;
+    bssid: string;
+    ip: string;
+    mac: string;
+    networkid: number;
+    linkspeed: number;
+    signalstrength: number;
+    gateway: string;
+    rssi: number;
+    speed: number;
+    frequency: number;
+    channel: number;
+    dns1: string;
+    dns2: string;
 }
+
 
 interface PingResponse {
     line?: string;
