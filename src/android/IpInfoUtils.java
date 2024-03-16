@@ -45,7 +45,7 @@ public class IpInfoUtils {
                         for (Network network : networks) {
                             NetworkInfo networkInfo = connectivityManager.getNetworkInfo(network);
 
-                            if (networkInfo != null && networkInfo.isConnected() && networkInfo.getType() == ConnectivityManager.TYPE_WIFI) {
+                            if (networkInfo != null && networkInfo.isConnected() ) {
                                 WifiInfo wifiInfo = wifiManager.getConnectionInfo();
                                 DhcpInfo dhcpInfo = wifiManager.getDhcpInfo(); // Get DHCP info for DNS details
 
