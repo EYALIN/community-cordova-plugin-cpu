@@ -20,10 +20,10 @@ public class PingTask {
                 String line;
                 String fullResponse = "";
                 while ((line = reader.readLine()) != null) {
+                    int progress = (int) (((double) linesRead / count) * 100);
                     linesRead++;
                     JSONObject progressUpdate = new JSONObject();
                       // Ensure progress does not exceed 100
-                                    int progress = (int) (((double) linesRead / count) * 100);
                                     progress = Math.min(progress, 100); // Cap progress at 100
                     progressUpdate.put("line", line);
                     if (fullResponse != null && !fullResponse.isEmpty()) {
