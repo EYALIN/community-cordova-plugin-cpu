@@ -4,11 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5a269414-5baa-4c38-b2f3-50c21d305b88" name="Changes" comment="update plugin">
+    <list default="true" id="5a269414-5baa-4c38-b2f3-50c21d305b88" name="Changes" comment="isConnectedToTheInternet - Support SDK&gt;29">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/plugin.xml" beforeDir="false" afterPath="$PROJECT_DIR$/plugin.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/android/PingTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/android/PingTask.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/android/IpInfoUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/android/IpInfoUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/android/WifiPlugin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/android/WifiPlugin.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -93,7 +94,12 @@
       <workItem from="1709959064513" duration="9732000" />
       <workItem from="1710582743464" duration="1835000" />
       <workItem from="1710593259268" duration="1509000" />
-      <workItem from="1711186960914" duration="29000" />
+      <workItem from="1711186960914" duration="287000" />
+      <workItem from="1720760722451" duration="1035000" />
+      <workItem from="1722058180072" duration="23000" />
+      <workItem from="1722059814051" duration="697000" />
+      <workItem from="1722061550247" duration="21000" />
+      <workItem from="1723267322946" duration="5531000" />
     </task>
     <task id="LOCAL-00001" summary="update plugin">
       <option name="closed" value="true" />
@@ -159,7 +165,15 @@
       <option name="project" value="LOCAL" />
       <updated>1710593285324</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="fixed progress bar in Ping">
+      <option name="closed" value="true" />
+      <created>1711187013726</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1711187013726</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -178,6 +192,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="update plugin" />
-    <option name="LAST_COMMIT_MESSAGE" value="update plugin" />
+    <MESSAGE value="fixed progress bar in Ping" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed progress bar in Ping" />
   </component>
 </project>

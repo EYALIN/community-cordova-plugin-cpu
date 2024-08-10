@@ -22,6 +22,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.util.Log;
+
 import java.util.List;
 
 public class WifiPlugin extends CordovaPlugin {
@@ -116,14 +118,60 @@ public class WifiPlugin extends CordovaPlugin {
     }
 
     private void isConnectedToInternet(CallbackContext callbackContext) {
-        ConnectivityManager connectivityManager = (ConnectivityManager) cordova.getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
-        if (connectivityManager != null) {
-            NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
-            boolean isConnected = activeNetworkInfo != null && activeNetworkInfo.isConnected();
-            callbackContext.success(isConnected ? 1 : 0);
-        } else {
-            callbackContext.error("ConnectivityManager is null");
-        }
+       ConnectivityManager connectivityManager = (ConnectivityManager) cordova.getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
+       if (connectivityManager != null) {
+           if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
+              Network network = connectivityManager.getActiveNetwork();
+                     if (network != null) {
+                         NetworkCapabilities networkCapabilities = connectivityManager.getNetworkCapabilities(network);
+                         if (networkCapabilities != null) {
+                             boolean isConnected = networkCapabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET) &&
+                                                   networkCapabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_VALIDATED) &&
+                                                   networkCapabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_NOT_RESTRICTED) &&
+                                                   networkCapabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_NOT_SUSPENDED);
+
+                             if (isConnected) {
+                                 boolean isWiFi = networkCapabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI);
+                                 boolean isCellular = networkCapabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR);
+                                 boolean isVPN = networkCapabilities.hasTransport(NetworkCapabilities.TRANSPORT_VPN);
+
+                                 // You can now use these flags to determine the type of connection
+                                 if (isWiFi) {
+                                     // Connected via WiFi
+                Log.d(TAG, "Connected via WiFi");
+                                     callbackContext.success(1); // or handle accordingly
+                                 } else if (isCellular) {
+                                     // Connected via Cellular
+                Log.d(TAG, "Connected via Cellular");
+                                     callbackContext.success(1); // or handle accordingly
+                                 } else if (isVPN) {
+                                     // Connected via VPN
+                Log.d(TAG, "Connected via VPN");
+                                     callbackContext.success(1); // or handle accordingly
+                                 } else {
+                                     // Unknown or unsupported transport
+                Log.d(TAG, "Connected via Unknown or unsupported transport");
+                                     callbackContext.success(1); // or handle accordingly
+                                 }
+                             } else {
+                                 callbackContext.success(0); // No internet connection
+                             }
+                         } else {
+                             callbackContext.success(0); // No internet connection
+                         }
+                     } else {
+                         callbackContext.success(0); // No network connection
+                     }
+           } else {
+               // For devices with SDK < 23, you can still use the deprecated method
+               NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+               boolean isConnected = activeNetworkInfo != null && activeNetworkInfo.isConnected();
+               callbackContext.success(isConnected ? 1 : 0);
+           }
+       } else {
+                Log.e(TAG, "ConnectivityManager is null");
+                callbackContext.success(0);
+       }
     }
 
     private void canConnectToInternet(CallbackContext callbackContext) {

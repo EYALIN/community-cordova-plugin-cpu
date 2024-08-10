@@ -18,6 +18,7 @@ import org.apache.cordova.PluginResult;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import android.util.Log;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -123,28 +124,44 @@ public class IpInfoUtils {
         }
     }
 
-    private static void fillLocationInfo(JSONObject ipInfoObject, LocationManager locationManager, CordovaInterface cordova) throws IOException, JSONException {
-        Location location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
-        if (location != null) {
-            ipInfoObject.put("latitude", location.getLatitude());
-            ipInfoObject.put("longitude", location.getLongitude());
-            List<Address> addresses = new ArrayList<>();
-            if (isNetworkAvailable(cordova.getActivity())) {
-                Geocoder geocoder = new Geocoder(cordova.getActivity(), Locale.getDefault());
-                addresses = geocoder.getFromLocation(location.getLatitude(), location.getLongitude(), 1);
-            }
+   private static void fillLocationInfo(JSONObject ipInfoObject, LocationManager locationManager, CordovaInterface cordova) throws JSONException {
+       Log.d(TAG, "fillLocationInfo begin");
+       Location location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+       if (location != null) {
+           Log.d(TAG, "fillLocationInfo location is exists");
+           ipInfoObject.put("latitude", location.getLatitude());
+           ipInfoObject.put("longitude", location.getLongitude());
+           Log.d(TAG, "fillLocationInfo finish lat and long");
 
-            if (!addresses.isEmpty()) {
-                Address address = addresses.get(0);
-                ipInfoObject.put("city", address.getLocality());
-                ipInfoObject.put("street", address.getThoroughfare());
-                ipInfoObject.put("country", address.getCountryName());
-                ipInfoObject.put("region", address.getSubAdminArea());
-                ipInfoObject.put("zipcode", address.getPostalCode());
-                ipInfoObject.put("state", address.getAdminArea());
-            }
-        }
-    }
+           List<Address> addresses = new ArrayList<>();
+           if (isNetworkAvailable(cordova.getActivity())) {
+               try {
+                   Log.d(TAG, "Geocoder begin");
+                   Geocoder geocoder = new Geocoder(cordova.getActivity(), Locale.getDefault());
+                   Log.d(TAG, "Geocoder success");
+                   addresses = geocoder.getFromLocation(location.getLatitude(), location.getLongitude(), 1);
+                   Log.d(TAG, "addresses success");
+               } catch (IOException e) {
+                   Log.e(TAG, "Geocoder failed due to network or I/O issues", e);
+               } catch (IllegalArgumentException e) {
+                   Log.e(TAG, "Geocoder failed due to illegal arguments", e);
+               } catch (Exception e) {
+                   Log.e(TAG, "Geocoder failed due to an unexpected error", e);
+               }
+           }
+
+           if (!addresses.isEmpty()) {
+               Address address = addresses.get(0);
+               ipInfoObject.put("city", address.getLocality());
+               ipInfoObject.put("street", address.getThoroughfare());
+               ipInfoObject.put("country", address.getCountryName());
+               ipInfoObject.put("region", address.getSubAdminArea());
+               ipInfoObject.put("zipcode", address.getPostalCode());
+               ipInfoObject.put("state", address.getAdminArea());
+           }
+       }
+   }
+
 
     public static boolean isNetworkAvailable(Context context) {
         ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
