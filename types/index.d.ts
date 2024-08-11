@@ -1,4 +1,4 @@
-interface WifiNetwork {
+export interface WifiNetwork {
     SSID: string;
     BSSID: string;
     capabilities: string;
@@ -9,7 +9,7 @@ interface WifiNetwork {
     distance: string;
     hasPassword: boolean;
 }
-interface NetworkDetails {
+export interface NetworkDetails {
     type: string;
     state: string;
     isConnected: boolean;
@@ -17,7 +17,7 @@ interface NetworkDetails {
     canConnectToRouter?: boolean;
     isConnectedToWifi?: boolean;
 }
-interface ConnectedDeviceInfo {
+export interface ConnectedDeviceInfo {
     ipAddress: string;
     deviceName: string;
     localHost: boolean;
@@ -28,7 +28,7 @@ interface ConnectedDeviceInfo {
     siteLocalAddress: boolean;
 }
 
-interface WifiDetails {
+export interface WifiDetails {
     iswifienabled: boolean;
     issupportwifi: boolean;
     ssid: string;
@@ -48,7 +48,7 @@ interface WifiDetails {
 }
 
 
-interface PingResponse {
+export interface PingResponse {
     line?: string;
     fullResponse?: string;
     progress?: number;
@@ -56,7 +56,7 @@ interface PingResponse {
     linesRead?: number;
 }
 
-interface IpInfo {
+export interface IpInfo {
     type: string;
     signal: number;
     speed: number;
