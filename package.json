@@ -1,6 +1,6 @@
 {
   "name": "community-cordova-plugin-wifi",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "types": "./types/index.d.ts",
   "readme": "README.md",
   "repository": "EYALIN/community-cordova-plugin-wifi/tree/master",
