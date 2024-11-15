@@ -126,9 +126,7 @@ public class WifiPlugin extends CordovaPlugin {
                          NetworkCapabilities networkCapabilities = connectivityManager.getNetworkCapabilities(network);
                          if (networkCapabilities != null) {
                              boolean isConnected = networkCapabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET) &&
-                                                   networkCapabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_VALIDATED) &&
-                                                   networkCapabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_NOT_RESTRICTED) &&
-                                                   networkCapabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_NOT_SUSPENDED);
+                                                   networkCapabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_VALIDATED);
 
                              if (isConnected) {
                                  boolean isWiFi = networkCapabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI);
