@@ -2,7 +2,7 @@
 
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
         id="community-cordova-plugin-cpu"
-        version="1.0.1">
+        version="1.0.2">
     <name>Cordova Plugin CPU</name>
     <description></description>
     <license>MIT</license>

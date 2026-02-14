@@ -1,6 +1,7 @@
 {
   "name": "community-cordova-plugin-cpu",
-  "version": "1.0.1",
+  "version": "1.0.2",
+  "main": "./types/index.d.ts",
   "types": "./types/index.d.ts",
   "readme": "README.md",
   "repository": "EYALIN/community-cordova-plugin-cpu/tree/master",
