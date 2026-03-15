@@ -42,54 +42,72 @@ public class CpuPlugin extends CordovaPlugin {
     }
 
     public boolean execute(String action, JSONArray args, final CallbackContext callbackContext) throws JSONException {
-        try {
-            if (action.equals("getCpuUsage")) {
-                JSONObject result = getCpuUsageInfo();
-                callbackContext.success(result);
-                return true;
-            } else if (action.equals("getCpuTemperature")) {
-                JSONObject result = getCpuTemperatureInfo();
-                callbackContext.success(result);
-                return true;
-            } else if (action.equals("getPerformanceMetrics")) {
-                JSONObject result = getPerformanceMetricsInfo();
-                callbackContext.success(result);
-                return true;
-            } else if (action.equals("getCpuInfo")) {
-                JSONArray arrCpuCores = new JSONArray();
-                mPackageManager = getContext().getPackageManager();
-                String primaryABI = System.getProperty("os.arch");
-                int numCores = Runtime.getRuntime().availableProcessors();
-                String secondaryABI = System.getProperty("os.arch");
-                StringBuilder cpuFrequencyInfo = new StringBuilder();
-
-                for (int i = 0; i < numCores; i++) {
-                    JSONObject objCore = new JSONObject();
-                    objCore.put("coreIndex", i);
-                    objCore.put("currentFrequency", getCPUCoreFrequency(i));
-                    arrCpuCores.put(objCore);
+        if (action.equals("getCpuUsage")) {
+            cordova.getThreadPool().execute(() -> {
+                try {
+                    JSONObject result = getCpuUsageInfo();
+                    callbackContext.success(result);
+                } catch (Exception e) {
+                    callbackContext.error(e.getMessage());
                 }
+            });
+            return true;
+        } else if (action.equals("getCpuTemperature")) {
+            cordova.getThreadPool().execute(() -> {
+                try {
+                    JSONObject result = getCpuTemperatureInfo();
+                    callbackContext.success(result);
+                } catch (Exception e) {
+                    callbackContext.error(e.getMessage());
+                }
+            });
+            return true;
+        } else if (action.equals("getPerformanceMetrics")) {
+            cordova.getThreadPool().execute(() -> {
+                try {
+                    JSONObject result = getPerformanceMetricsInfo();
+                    callbackContext.success(result);
+                } catch (Exception e) {
+                    callbackContext.error(e.getMessage());
+                }
+            });
+            return true;
+        } else if (action.equals("getCpuInfo")) {
+            final String phrase = args.getString(0);
+            cordova.getThreadPool().execute(() -> {
+                try {
+                    JSONArray arrCpuCores = new JSONArray();
+                    mPackageManager = getContext().getPackageManager();
+                    String primaryABI = System.getProperty("os.arch");
+                    int numCores = Runtime.getRuntime().availableProcessors();
+                    String secondaryABI = System.getProperty("os.arch");
 
-                JSONObject obj = new JSONObject();
-                obj.put("cpuArchitecture", Build.CPU_ABI);
-                obj.put("primaryABI", primaryABI);
-                obj.put("secondaryABI", secondaryABI);
-                obj.put("cpuModel", Build.HARDWARE);
-                obj.put("cpuCores", Runtime.getRuntime().availableProcessors());
-                obj.put("cpuFrequencyMax", getMaxCpuFrequency());
-                obj.put("cpuFrequencyMin", getMinCpuFrequency());
-                obj.put("cpuFrequencyInfo", arrCpuCores);
+                    for (int i = 0; i < numCores; i++) {
+                        JSONObject objCore = new JSONObject();
+                        objCore.put("coreIndex", i);
+                        objCore.put("currentFrequency", getCPUCoreFrequency(i));
+                        arrCpuCores.put(objCore);
+                    }
 
-                String phrase = args.getString(0);
-                final PluginResult result = new PluginResult(PluginResult.Status.OK, obj);
-                callbackContext.sendPluginResult(result);
-            }
-        } catch (Exception e) {
-            callbackContext.error(e.getMessage());
-            Log.d(TAG, e.getMessage());
-            return false;
+                    JSONObject obj = new JSONObject();
+                    obj.put("cpuArchitecture", Build.CPU_ABI);
+                    obj.put("primaryABI", primaryABI);
+                    obj.put("secondaryABI", secondaryABI);
+                    obj.put("cpuModel", Build.HARDWARE);
+                    obj.put("cpuCores", Runtime.getRuntime().availableProcessors());
+                    obj.put("cpuFrequencyMax", getMaxCpuFrequency());
+                    obj.put("cpuFrequencyMin", getMinCpuFrequency());
+                    obj.put("cpuFrequencyInfo", arrCpuCores);
+
+                    final PluginResult result = new PluginResult(PluginResult.Status.OK, obj);
+                    callbackContext.sendPluginResult(result);
+                } catch (Exception e) {
+                    callbackContext.error(e.getMessage());
+                }
+            });
+            return true;
         }
-        return true;
+        return false;
     }
 
     private String getCPUCoreFrequency(int coreIndex) {
