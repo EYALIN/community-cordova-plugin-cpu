@@ -1,6 +1,6 @@
 {
   "name": "community-cordova-plugin-cpu",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "main": "./types/index.d.ts",
   "types": "./types/index.d.ts",
   "readme": "README.md",
